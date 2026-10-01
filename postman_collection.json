@@ -1,0 +1,283 @@
+{
+  "info": {
+    "name": "E-Commerce Backend REST API",
+    "description": "Collection covering all 10 required APIs (Users & Products) plus success and error test cases.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "apiKey", "value": "my-secret-api-key-123" }
+  ],
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "1. GET All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/users", "host": ["{{baseUrl}}"], "path": ["api", "users"] }
+          }
+        },
+        {
+          "name": "2. GET Single User (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/users/1", "host": ["{{baseUrl}}"], "path": ["api", "users", "1"] }
+          }
+        },
+        {
+          "name": "2b. GET Single User (Not Found - 404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/users/999", "host": ["{{baseUrl}}"], "path": ["api", "users", "999"] }
+          }
+        },
+        {
+          "name": "3. POST Add User (Success)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bilal Hassan\",\n  \"email\": \"bilal.hassan@example.com\",\n  \"age\": 30\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users?apiKey={{apiKey}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"],
+              "query": [{ "key": "apiKey", "value": "{{apiKey}}" }]
+            }
+          }
+        },
+        {
+          "name": "3b. POST Add User (Validation Error - 400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"B\",\n  \"email\": \"not-an-email\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users?apiKey={{apiKey}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"],
+              "query": [{ "key": "apiKey", "value": "{{apiKey}}" }]
+            }
+          }
+        },
+        {
+          "name": "3c. POST Add User (No API Key - 401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bilal Hassan\",\n  \"email\": \"bilal.hassan@example.com\",\n  \"age\": 30\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/users", "host": ["{{baseUrl}}"], "path": ["api", "users"] }
+          }
+        },
+        {
+          "name": "4. PUT Update User (Success)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ali Khan Updated\",\n  \"email\": \"ali.khan@example.com\",\n  \"age\": 29\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/1?apiKey={{apiKey}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "1"],
+              "query": [{ "key": "apiKey", "value": "{{apiKey}}" }]
+            }
+          }
+        },
+        {
+          "name": "4b. PUT Update User (Invalid API Key - 401)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ali Khan Updated\",\n  \"email\": \"ali.khan@example.com\",\n  \"age\": 29\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/1?apiKey=wrong-key",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "1"],
+              "query": [{ "key": "apiKey", "value": "wrong-key" }]
+            }
+          }
+        },
+        {
+          "name": "5. DELETE User (Success)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/2?apiKey={{apiKey}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "2"],
+              "query": [{ "key": "apiKey", "value": "{{apiKey}}" }]
+            }
+          }
+        },
+        {
+          "name": "5b. DELETE User (Not Found - 404)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/999?apiKey={{apiKey}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "999"],
+              "query": [{ "key": "apiKey", "value": "{{apiKey}}" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "6. GET All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/products", "host": ["{{baseUrl}}"], "path": ["api", "products"] }
+          }
+        },
+        {
+          "name": "7. GET Single Product (Success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/products/1", "host": ["{{baseUrl}}"], "path": ["api", "products", "1"] }
+          }
+        },
+        {
+          "name": "7b. GET Single Product (Not Found - 404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/products/999", "host": ["{{baseUrl}}"], "path": ["api", "products", "999"] }
+          }
+        },
+        {
+          "name": "8. POST Add Product (Success)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"USB-C Hub\",\n  \"description\": \"7-in-1 USB-C hub adapter\",\n  \"price\": 2999,\n  \"category\": \"Electronics\",\n  \"stock\": 100\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products?apiKey={{apiKey}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products"],
+              "query": [{ "key": "apiKey", "value": "{{apiKey}}" }]
+            }
+          }
+        },
+        {
+          "name": "8b. POST Add Product (Validation Error - 400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"X\",\n  \"price\": -10\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products?apiKey={{apiKey}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products"],
+              "query": [{ "key": "apiKey", "value": "{{apiKey}}" }]
+            }
+          }
+        },
+        {
+          "name": "8c. POST Add Product (No API Key - 401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"USB-C Hub\",\n  \"description\": \"7-in-1 USB-C hub adapter\",\n  \"price\": 2999,\n  \"category\": \"Electronics\",\n  \"stock\": 100\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/products", "host": ["{{baseUrl}}"], "path": ["api", "products"] }
+          }
+        },
+        {
+          "name": "9. PUT Update Product (Success)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Wireless Mouse Pro\",\n  \"description\": \"Updated ergonomic wireless mouse\",\n  \"price\": 1799,\n  \"category\": \"Electronics\",\n  \"stock\": 45\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products/1?apiKey={{apiKey}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "1"],
+              "query": [{ "key": "apiKey", "value": "{{apiKey}}" }]
+            }
+          }
+        },
+        {
+          "name": "9b. PUT Update Product (Not Found - 404)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ghost Product\",\n  \"price\": 100,\n  \"category\": \"Misc\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products/999?apiKey={{apiKey}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "999"],
+              "query": [{ "key": "apiKey", "value": "{{apiKey}}" }]
+            }
+          }
+        },
+        {
+          "name": "10. DELETE Product (Success)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/2?apiKey={{apiKey}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "2"],
+              "query": [{ "key": "apiKey", "value": "{{apiKey}}" }]
+            }
+          }
+        },
+        {
+          "name": "10b. DELETE Product (Invalid API Key - 401)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products/2?apiKey=wrong-key",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "2"],
+              "query": [{ "key": "apiKey", "value": "wrong-key" }]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
